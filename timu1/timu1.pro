@@ -25,8 +25,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    direction_Card.cpp
 
 HEADERS += \
         mainwindow.h

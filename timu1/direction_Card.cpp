@@ -37,7 +37,7 @@ int  main()
         //定义变量
         int max1 = contourArea(contours[0],true);
         int max2 = contourArea(contours[0],true);
-        int t,m=0;
+        int t=0;//t为最大面积轮廓
         for(int i = 0;i<contours.size();i++)
         {
             //外接矩形宽高比
@@ -51,18 +51,20 @@ int  main()
             boundRect[i] = boundingRect(conPoly[i]);
             //宽高比
             float aspRatio = (float)boundRect[i].width / boundRect[i].height;
-            if (aspRatio > 0.5&& aspRatio<0.8&&area>5000&&area<20000)
+            if (aspRatio > 0.2&& aspRatio<0.8&&area>1000&&area<20000)
             {
-
+                    //(aspRatio > 0.5&& aspRatio<0.8&&area>3000&&area<7000)
+                    //0.6  0.7左转  0.3直行  3000
                     if(max1 < contourArea(contours[i]))
                     {
                         max1 =contourArea(contours[i]);
                         t = i;
-                        //cout << aspRatio << endl;
+                       // cout << aspRatio << endl;
                        // cout<<i<<endl;
                         //cout<<area<<endl;
                     }
-
+                    cout << aspRatio << endl;
+                    cout<<area<<endl;
              }
         }
         // cout<<t<<endl;
@@ -84,7 +86,7 @@ int  main()
         //显示拟合出的直线
         line(a,p1,p2,Scalar(0,0,255),2);
         //轮条滚动选择范围
-        /*namedWindow("Trackbars", (640, 200));
+       /* namedWindow("Trackbars", (640, 200));
         createTrackbar("Hue Min", "Trackbars", &hmin, 179);
         createTrackbar("Hue Max", "Trackbars", &hmax, 179);
         createTrackbar("Sat Min", "Trackbars", &smin, 255);
@@ -92,9 +94,9 @@ int  main()
         createTrackbar("Val Min", "Trackbars", &vmin, 255);
         createTrackbar("Val Max", "Trackbars", &vmax, 255);*/
         //返回方向
-        if(k_line<5 &&k_line>0){cout<<"左转"<<endl;}
-        else if(k_line>-5&&k_line<0){cout<<"右转"<<endl;}
-        else if(k_line>5||k_line<-5){cout<<"直行"<<endl;}
+        if(k_line<5 &&k_line>0){cout<<"左转"<<endl;return 0;}
+        else if(k_line>-5&&k_line<0){cout<<"右转"<<endl;return 0;}
+        else if(k_line>5||k_line<-5){cout<<"直行"<<endl;return 0;}
         //展示最终图像
         imshow("1",a);
         waitKey(1);         
